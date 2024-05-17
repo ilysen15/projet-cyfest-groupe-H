@@ -128,6 +128,8 @@ int main() {
 
         printf("Entrer le nom de la salle %d : ", i + 1);
         scanf("%s", nom);
+        fgets(nom, 50, stdin);
+        nom[strlen(nom) - 1] = '\0';
         printf("Entrer le nombre de rangées pour la salle %d : ", i + 1);
         scanf("%d", &nombre_rangees);
         printf("Entrer le nombre de sièges par rangée pour la salle %d : ", i + 1);
@@ -136,6 +138,18 @@ int main() {
         scanf("%d", &nombre_rangees_a);
         printf("Entrer le nombre de rangées pour la catégorie B pour la salle %d : ", i + 1);
         scanf("%d", &nombre_rangees_b);
+       
+        // ouvrir le fichier
+       FILE *fp = fopen("salle.txt", "a"); 
+
+    if (fp == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+
+    fprintf(fp, "nom: %s\n nombre_rangees: %d\n le nombre de sièges par rangée: %d\n le nombre de rangées pour la catégorie A: %d\n le nombre de rangées pour la catégorie B: %d\n\n", nom, nombre_rangees, sieges_par_rangee,nombre_rangees_a, nombre_rangees_b);
+        
+    fclose(fp);
 
         salles[i] = creer_salle(nom, nombre_rangees, sieges_par_rangee);
         configurer_categories(salles[i], nombre_rangees_a, nombre_rangees_b);
