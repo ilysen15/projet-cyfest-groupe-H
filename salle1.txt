@@ -1,1 +1,6 @@
+nom: confort
+ nombre_rangees: 30
+ le nombre de sièges par rangée: 20
+ le nombre de rangées pour la catégorie A: 10
+ le nombre de rangées pour la catégorie B: 20
 
