@@ -11,7 +11,7 @@ void enrigistresalle(const Salle* salle) {
   remove("save.txt");//supprime le contenue du file
   file=fopen("save.txt","w");
      if (file == NULL) {
-        printf("Could not open file.\n");
+        printf("fichier n'existe pas.\n");
         exit(0);
     }
   fprintf(file, "%s", recovertext(partie));
@@ -19,6 +19,5 @@ void enrigistresalle(const Salle* salle) {
   printf("Votre partie a bien ete enregistre!");
 }
 
-void restartGame(const char* partie){
-  displayPart(partie);
-}
+
+
