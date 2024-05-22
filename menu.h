@@ -1,4 +1,4 @@
 #include <stdio.h>
-#include "manger.h"
+#include "maneger.h"
 
 int choixsalle(void);
