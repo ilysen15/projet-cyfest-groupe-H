@@ -5,3 +5,4 @@
 
 
 Salle* creer_salle(const char* nom, int nombre_rangees, int sieges_par_rangee)
+void configurer_categories(Salle* salle, int nombre_rangees_a, int nombre_rangees_b) 
