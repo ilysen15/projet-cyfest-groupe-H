@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "managar.h>
 
 // Structure pour un siège
 typedef struct {
