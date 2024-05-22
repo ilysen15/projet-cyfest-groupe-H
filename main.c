@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include"manegar.h>
+#include <string.h>
 #include<menu.h>
 
 int main() {
