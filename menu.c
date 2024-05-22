@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "save.h"
+#include "menu.h"
 
 int choixsalle(void){
 int choix;
@@ -19,6 +21,7 @@ int choix;
         switch (choix) {
             case 1:
                 fopen( "salle1.txt");
+             
 
                 break;
             case 2:
