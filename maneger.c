@@ -2,35 +2,40 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Structure pour un siège
 typedef struct {
     char categorie;  // 'A', 'B', 'C', ou 'P' pour Pit (fosse)
     int reserve;     // 0 pour libre, 1 pour réservé
 } Siege;
 
+// Structure pour une rangée de sièges
 typedef struct {
-    Siege *sieges;
-    int nombre_sieges;
+    Siege *sieges;   // Tableau de sièges
+    int nombre_sieges; // Nombre de sièges dans la rangée
 } Rangee;
 
+// Structure pour une salle de concert
 typedef struct {
-    char nom[100];  // Utilisation d'un tableau de char pour stocker le nom de la salle
+    char nom[100];   // Nom de la salle
     int nombre_rangees; // Nombre de rangées
-    int sieges_par_rangee;  // Nombre de sièges par rangée
-    Rangee *rangees;
-    int nombre_rangees_a;
-    int nombre_rangees_b;
+    int sieges_par_rangee; // Nombre de sièges par rangée
+    Rangee *rangees; // Tableau de rangées
+    int nombre_rangees_a; // Nombre de rangées en catégorie A
+    int nombre_rangees_b; // Nombre de rangées en catégorie B
 } Salle;
 
+// Structure pour un concert
 typedef struct {
-    char nom[100];
-    Salle *salle;
+    char nom[100];  // Nom du concert
+    Salle *salle;   // Pointeur vers la salle
     int a_fosse;    // 0 pour non, 1 pour oui
-    double prix_a;
-    double prix_b;
-    double prix_c;
-    char heure_fin[10];
+    double prix_a;  // Prix pour catégorie A
+    double prix_b;  // Prix pour catégorie B
+    double prix_c;  // Prix pour catégorie C
+    char heure_fin[10]; // Heure de fin du concert
 } Concert;
 
+// Fonction pour créer une salle
 Salle* creer_salle(const char* nom, int nombre_rangees, int sieges_par_rangee) {
     Salle* salle = (Salle*)malloc(sizeof(Salle));
     strcpy(salle->nom, nom);
@@ -50,6 +55,7 @@ Salle* creer_salle(const char* nom, int nombre_rangees, int sieges_par_rangee) {
     return salle;
 }
 
+// Fonction pour configurer les catégories de sièges
 void configurer_categories(Salle* salle, int nombre_rangees_a, int nombre_rangees_b) {
     salle->nombre_rangees_a = nombre_rangees_a;
     salle->nombre_rangees_b = nombre_rangees_b;
@@ -67,6 +73,7 @@ void configurer_categories(Salle* salle, int nombre_rangees_a, int nombre_rangee
     }
 }
 
+// Fonction pour attribuer un concert à une salle
 Concert* attribuer_concert(Salle* salle, const char* nom, int a_fosse, double prix_a, double prix_b, double prix_c, const char* heure_fin) {
     Concert* concert = (Concert*)malloc(sizeof(Concert));
     strcpy(concert->nom, nom);
@@ -80,7 +87,7 @@ Concert* attribuer_concert(Salle* salle, const char* nom, int a_fosse, double pr
     if (a_fosse) {
         for (int i = 0; i < salle->nombre_rangees_a; i++) {
             for (int j = 0; j < salle->sieges_par_rangee; j++) {
-                salle->rangees[i].sieges[j].categorie = 'P'; // P pour Pit (fosse)
+                salle->rangees[i].sieges[j].categorie = 'P'; // 'P' pour Pit (fosse)
             }
         }
     }
@@ -88,6 +95,7 @@ Concert* attribuer_concert(Salle* salle, const char* nom, int a_fosse, double pr
     return concert;
 }
 
+// Fonction pour afficher l'état d'une salle
 void afficher_etat_salle(Salle* salle) {
     int total_sieges = salle->nombre_rangees * salle->sieges_par_rangee;
     int sieges_reserves = 0;
@@ -103,6 +111,7 @@ void afficher_etat_salle(Salle* salle) {
     printf("Ratio de réservation: %.2f%%\n", (double)sieges_reserves / total_sieges * 100);
 }
 
+// Fonction pour libérer la mémoire d'une salle
 void liberer_salle(Salle* salle) {
     for (int i = 0; i < salle->nombre_rangees; i++) {
         free(salle->rangees[i].sieges);
@@ -111,6 +120,7 @@ void liberer_salle(Salle* salle) {
     free(salle);
 }
 
+// Fonction pour libérer la mémoire d'un concert
 void liberer_concert(Concert* concert) {
     free(concert);
 }
@@ -150,12 +160,12 @@ int main() {
     fprintf(fp, "nom: %s\n nombre_rangees: %d\n le nombre de sièges par rangée: %d\n le nombre de rangées pour la catégorie A: %d\n le nombre de rangées pour la catégorie B: %d\n\n", nom, nombre_rangees, sieges_par_rangee,nombre_rangees_a, nombre_rangees_b);
         
     fclose(fp);
-
+        
         salles[i] = creer_salle(nom, nombre_rangees, sieges_par_rangee);
         configurer_categories(salles[i], nombre_rangees_a, nombre_rangees_b);
     }
 
-    // Attribuer un concert à la première salle comme exemple
+    // Exemple d'attribution de concert
     Concert* concert = attribuer_concert(salles[0], "Concert Rock", 1, 100.0, 75.0, 50.0, "22:00");
     afficher_etat_salle(salles[0]);
 
@@ -166,8 +176,5 @@ int main() {
     }
     free(salles);
 
-    return 0;
+    return 0;
 }
-
-
-
