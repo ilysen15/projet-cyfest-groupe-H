@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include"manegar.h>
+#include<menu.h>
+
 int main() {
     int nombre_salles;
     printf("Entrer le nombre de salles : ");
