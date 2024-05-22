@@ -17,7 +17,7 @@ typedef struct {
 
 // Structure pour une salle de concert
 typedef struct {
-    char nom[100];   // Nom de la salle
+    char nom[TAILLE];   // Nom de la salle
     int nombre_rangees; // Nombre de rangées
     int sieges_par_rangee; // Nombre de sièges par rangée
     Rangee *rangees; // Tableau de rangées
@@ -27,7 +27,7 @@ typedef struct {
 
 // Structure pour un concert
 typedef struct {
-    char nom[100];  // Nom du concert
+    char nom[TAILLE];  // Nom du concert
     Salle *salle;   // Pointeur vers la salle
     int a_fosse;    // 0 pour non, 1 pour oui
     double prix_a;  // Prix pour catégorie A
