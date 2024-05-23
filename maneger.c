@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include"manger.h"
 #define TAILLE 100
  
 //structure pour la date de concert
