@@ -13,7 +13,6 @@ void afficherMenu() {
 
 int modeManager(void){
 int salle;
-    printf("=== Mode Manager ===\n");
  do {
         printf("=== Mode Manager ===\n");
         printf("choissiez 1 pour salle de classe A \n");
