@@ -5,7 +5,7 @@
 
 
 Salle *creer_salle(){
-Concert* attribuer_concert(Salle* salle, const char* nom, int a_fosse, double prix_a, double prix_b, double prix_c, const char* heure_fin);
+Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse, float prix_a, float prix_b, float prix_c, Heure* heure_fin, Heure* heure_debut) {
 void afficher_etat_salle(Salle* salle) ;
 void liberer_salle(Salle* salle) ;
 void liberer_concert(Concert* concert) ;
