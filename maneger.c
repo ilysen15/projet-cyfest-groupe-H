@@ -13,9 +13,9 @@ int an;
 
 //structure l'heure de debut de la fin de concert
 typedef struct{
-int heure[23];
-int min[59];
-int sec[59];
+int heure;
+int min;
+int sec;
 }Heure;
 
 // Structure pour un siège
@@ -36,16 +36,17 @@ typedef struct {
 
 // Structure pour un concert
 typedef struct {
-    char nom[TAILLE];  // Nom du concert
-    Salle *salle;      // Pointeur vers la salle
-    int   fosse;       // 0 pour non, 1 pour oui
-    float prix_a;      // Prix pour catégorie A
-    float prix_b;      // Prix pour catégorie B
-    float prix_c;      // Prix pour catégorie C
-    Heure * heure_debut; // Heure de debut du concert
-    Heure * heure_fin; // Heure de fin du concert
-    Date *date_debut; //date de debut de concert 
-    Date *date_fin;//date de fin de concert
+    char nom[TAILLE];           // Nom du concert
+    char nom_chanteur[TAILLE];  // Nom de chanteur
+    Salle *salle;               // Pointeur vers la salle
+    int   fosse;                // 0 pour non, 1 pour oui
+    float prix_a;               // Prix pour catégorie A
+    float prix_b;               // Prix pour catégorie B
+    float prix_c;               // Prix pour catégorie C
+    Heure heure_debut;          // Heure de debut du concert
+    Heure heure_fin;            // Heure de fin du concert
+    Date  date_debut;           // date de debut de concert 
+    Date  date_fin;             // date de fin de concert
 } Concert;
 
 // Fonction pour créer une salle
@@ -107,17 +108,20 @@ Salle *creer_salle(){
 //}
 
 // Fonction pour attribuer un concert à une salle
-Concert* attribuer_concert(Salle* salle, ) {
+Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse, float prix_a, float prix_b, float prix_c, Heure* heure_fin, Heure* heure_debut) {
     Concert* concert = (Concert*)malloc(sizeof(Concert));
     strcpy(concert->nom, nom);
+    strcpy(concert->nom_chanteur, nom_chanteur);
     concert->salle = salle;
     concert-> fosse = fosse;
     concert->prix_a = prix_a;
     concert->prix_b = prix_b;
     concert->prix_c = prix_c;
+    concert-> heure_fin= heure_fin;
+    concert-> heure_debut= heure_debut;
     strcpy(concert->heure_fin, heure_fin);
 
-    if (a_fosse) {
+    if (fosse) {
         for (int i = 0; i < salle->nombre_rangees_a; i++) {
             for (int j = 0; j < salle->sieges_par_rangee; j++) {
                 salle->rangees[i].sieges[j].categorie = 'P'; // 'P' pour Pit (fosse)
@@ -141,7 +145,7 @@ void afficher_etat_salle(Salle* salle) {
     }
     printf("Salle: %s\n", salle->nom);
     printf("Total de sièges: %d, Sièges réservés: %d\n", total_sieges, sieges_reserves);
-    printf("Ratio de réservation: %.2f%%\n", (double)sieges_reserves / total_sieges * 100);
+    printf("Ratio de réservation: %f%%\n", (float)sieges_reserves / total_sieges * 100);
 }
 
 // Fonction pour libérer la mémoire d'une salle
