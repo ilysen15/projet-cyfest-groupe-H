@@ -1,28 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "managar.h>
+#include "managar.h"
 
 // Structure pour un siège
 typedef struct {
     char categorie;  // 'A', 'B', 'C', ou 'P' pour Pit (fosse)
     int reserve;     // 0 pour libre, 1 pour réservé
+    int siege_range; //combien de siege par rangee
+    int siege_A;  //siege dans la categorie A
+    int siege_B; //siege dans la categorie B
+    int siege_C; //siege dans la categorie C
 } Siege;
-
-// Structure pour une rangée de sièges
-typedef struct {
-    Siege *sieges;   // Tableau de sièges
-    int nombre_sieges; // Nombre de sièges dans la rangée
-} Rangee;
 
 // Structure pour une salle de concert
 typedef struct {
     char nom[TAILLE];   // Nom de la salle
     int nombre_rangees; // Nombre de rangées
-    int sieges_par_rangee; // Nombre de sièges par rangée
-    Rangee *rangees; // Tableau de rangées
-    int nombre_rangees_a; // Nombre de rangées en catégorie A
-    int nombre_rangees_b; // Nombre de rangées en catégorie B
+    Siege *siege; // tableux des caracterstiques des siege
 } Salle;
 
 // Structure pour un concert
