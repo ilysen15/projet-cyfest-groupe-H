@@ -27,7 +27,7 @@ typedef struct {
 typedef struct {
     char nom[TAILLE];  // Nom du concert
     Salle *salle;      // Pointeur vers la salle
-    int a_fosse;       // 0 pour non, 1 pour oui
+    int   fosse;       // 0 pour non, 1 pour oui
     float prix_a;      // Prix pour catégorie A
     float prix_b;      // Prix pour catégorie B
     float prix_c;      // Prix pour catégorie C
@@ -93,11 +93,11 @@ Salle *creer_salle(){
 //}
 
 // Fonction pour attribuer un concert à une salle
-Concert* attribuer_concert(Salle* salle, const char* nom, int a_fosse, double prix_a, double prix_b, double prix_c, const char* heure_fin) {
+Concert* attribuer_concert(Salle* salle, const char* nom, int fosse, double prix_a, double prix_b, double prix_c, const char* heure_fin) {
     Concert* concert = (Concert*)malloc(sizeof(Concert));
     strcpy(concert->nom, nom);
     concert->salle = salle;
-    concert->a_fosse = a_fosse;
+    concert-> fosse = fosse;
     concert->prix_a = prix_a;
     concert->prix_b = prix_b;
     concert->prix_c = prix_c;
