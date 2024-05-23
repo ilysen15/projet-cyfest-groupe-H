@@ -3,6 +3,10 @@
 #include <string.h>
 #define TAILLE 100
 
+typedef struct{
+
+}date;
+
 // Structure pour un siège
 typedef struct {
     char categorie;  // 'A', 'B', 'C', ou 'P' pour Pit (fosse)
