@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "festivalier.h"
+#include "maneger.h"
 
 void afficherMenu() {
     printf("\n=== Menu ===\n");
