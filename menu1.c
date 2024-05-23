@@ -12,22 +12,22 @@ void afficherMenu() {
 
 
 int modeManager(void){
-int choix;
+int salle;
     printf("=== Mode Manager ===\n");
  do {
-        printf("Menu \n");
+        printf("=== Mode Manager ===\n");
         printf("choissiez 1 pour salle de classe A \n");
         printf("choissiez 2 pour salle de classe B \n");
-        printf("choissiez 1 pour salle de classe C \n");
+        printf("choissiez 3 pour salle de classe C \n");
         printf("choissiez 4 pour creer une salle \n");
-        printf("Entrez votre choix : ");
-        scanf("%d", &choix);
+        printf("Entrez votre salle : ");
+        scanf("%d", &salle); 
         while(getchar()!='\n'){
           
         }
    
 
-        switch (choix) {
+        switch (salle) {
             case 1:
                 fopen( "salle1.txt");
              
@@ -50,7 +50,7 @@ int choix;
                 printf("Choix invalide. Veuillez entrer un nombre entre 1 et 4.\n");
                 break;
         }
-    } while ((choix<0 || choix >4) || getchar()!='\n');
+    } while ((salle<0 || salle >4) || getchar()!='\n');
 
     return 0;
 }
