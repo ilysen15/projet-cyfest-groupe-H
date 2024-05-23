@@ -1,55 +1,74 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "managar.h"
+#define TAILLE 100
 
 // Structure pour un siège
 typedef struct {
     char categorie;  // 'A', 'B', 'C', ou 'P' pour Pit (fosse)
     int reserve;     // 0 pour libre, 1 pour réservé
-    int siege_range; //combien de siege par rangee
-    int siege_A;  //siege dans la categorie A
-    int siege_B; //siege dans la categorie B
-    int siege_C; //siege dans la categorie C
 } Siege;
 
 // Structure pour une salle de concert
 typedef struct {
     char nom[TAILLE];   // Nom de la salle
     int nombre_rangees; // Nombre de rangées
-    Siege *siege; // tableux des caracterstiques des siege
+    int siege_range;    // Nombre de sièges par rangée
+    int siege_A;        // Nombre de sièges dans la catégorie A
+    int siege_B;        // Nombre de sièges dans la catégorie B
+    int siege_C;        // Nombre de sièges dans la catégorie C
 } Salle;
 
 // Structure pour un concert
 typedef struct {
     char nom[TAILLE];  // Nom du concert
-    Salle *salle;   // Pointeur vers la salle
-    int a_fosse;    // 0 pour non, 1 pour oui
-    double prix_a;  // Prix pour catégorie A
-    double prix_b;  // Prix pour catégorie B
-    double prix_c;  // Prix pour catégorie C
+    Salle *salle;      // Pointeur vers la salle
+    int a_fosse;       // 0 pour non, 1 pour oui
+    float prix_a;      // Prix pour catégorie A
+    float prix_b;      // Prix pour catégorie B
+    float prix_c;      // Prix pour catégorie C
     char heure_fin[10]; // Heure de fin du concert
 } Concert;
 
 // Fonction pour créer une salle
-Salle* creer_salle(const char* nom, int nombre_rangees, int sieges_par_rangee) {
-    Salle* salle = (Salle*)malloc(sizeof(Salle));
-    strcpy(salle->nom, nom);
-    salle->nombre_rangees = nombre_rangees;
-    salle->sieges_par_rangee = sieges_par_rangee;
-    salle->rangees = (Rangee*)malloc(nombre_rangees * sizeof(Rangee));
+Salle *creer_salle(){
+    int nombre_salles;
+    printf("Entrer le nombre de salles : ");
+    scanf("%d", &nombre_salles);
 
-    for (int i = 0; i < nombre_rangees; i++) {
-        salle->rangees[i].sieges = (Siege*)malloc(sieges_par_rangee * sizeof(Siege));
-        salle->rangees[i].nombre_sieges = sieges_par_rangee;
-        for (int j = 0; j < sieges_par_rangee; j++) {
-            salle->rangees[i].sieges[j].reserve = 0;
-            salle->rangees[i].sieges[j].categorie = 'C';
+    Salle* s = (Salle*)malloc(nombre_salles * sizeof(Salle));
+
+    for (int i = 0; i < nombre_salles; i++) {
+        printf("Entrer le nom de la salle %d : ", i + 1);
+        scanf("%s", s[i].nom);
+        printf("Entrer le nombre de rangées pour la salle %d : ", i + 1);
+        scanf("%d", &s[i].nombre_rangees);
+        printf("Entrer le nombre de sièges par rangée pour la salle %d : ", i + 1);
+        scanf("%d", &s[i].siege_range);
+        printf("Entrer le nombre de sièges pour la catégorie A pour la salle %d : ", i + 1);
+        scanf("%d", &s[i].siege_A);
+        printf("Entrer le nombre de sièges pour la catégorie B pour la salle %d : ", i + 1);
+        scanf("%d", &s[i].siege_B);
+        printf("Entrer le nombre de sièges pour la catégorie C pour la salle %d : ", i + 1);
+        scanf("%d", &s[i].siege_C);
+
+        // ouvrir le fichier
+        FILE *fp = fopen("salle.txt", "a");
+
+        if (fp == NULL) {
+            printf("Error opening file!\n");
+            return 1;
         }
+
+        fprintf(fp, "Nom de la salle : %s\nNombre de rangées : %d\nNombre de sièges par rangée : %d\nNombre de sièges pour la catégorie A : %d\nNombre de sièges pour la catégorie B : %d\nNombre de sièges pour la catégorie C : %d\n\n", s[i].nom, s[i].nombre_rangees, s[i].siege_range, s[i].siege_A, s[i].siege_B, s[i].siege_C);
+
+        fclose(fp);
     }
 
-    return salle;
+    return s;
+    
 }
+
 
 // Fonction pour configurer les catégories de sièges
 void configurer_categories(Salle* salle, int nombre_rangees_a, int nombre_rangees_b) {
