@@ -2,10 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 #define TAILLE 100
-
+ 
+//structure pour la date de concert
 typedef struct{
+int jour;
+int mois;
+int an;
+}Date;
+ 
 
-}date;
+//structure l'heure de debut de la fin de concert
+typedef struct{
+int heure[23];
+int min[59];
+int sec[59];
+}Heure;
 
 // Structure pour un siège
 typedef struct {
@@ -31,7 +42,10 @@ typedef struct {
     float prix_a;      // Prix pour catégorie A
     float prix_b;      // Prix pour catégorie B
     float prix_c;      // Prix pour catégorie C
-    char heure_fin[10]; // Heure de fin du concert
+    Heure * heure_debut; // Heure de debut du concert
+    Heure * heure_fin; // Heure de fin du concert
+    Date *date_debut; //date de debut de concert 
+    Date *date_fin;//date de fin de concert
 } Concert;
 
 // Fonction pour créer une salle
@@ -93,7 +107,7 @@ Salle *creer_salle(){
 //}
 
 // Fonction pour attribuer un concert à une salle
-Concert* attribuer_concert(Salle* salle, const char* nom, int fosse, double prix_a, double prix_b, double prix_c, const char* heure_fin) {
+Concert* attribuer_concert(Salle* salle, ) {
     Concert* concert = (Concert*)malloc(sizeof(Concert));
     strcpy(concert->nom, nom);
     concert->salle = salle;
