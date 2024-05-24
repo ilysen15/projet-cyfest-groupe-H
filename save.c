@@ -6,7 +6,7 @@
 
 void enrigistresalle(const Salle* salle) {
   FILE *file;
-  recovertext();
+  ();
 
   remove("save.txt");//supprime le contenue du file
   file=fopen("save.txt","w");
@@ -14,7 +14,7 @@ void enrigistresalle(const Salle* salle) {
         printf("fichier n'existe pas.\n");
         exit(0);
     }
-  fprintf(file, "%s", recovertext(salle));
+  fprintf(file, "%s", (salle));
   fclose(file);
   printf("Votre partie a bien ete enregistre!");
 }
