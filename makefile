@@ -1,6 +1,6 @@
 all: salle
 
-festivalier.o:festivalier.c fesrivalier.h
+festivalier.o:festivalier.c festivalier.h
         gcc -Wall -Wextra -Wpedantic -c festivalier.c
 
 save.o: save.c save.h
