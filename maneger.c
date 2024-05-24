@@ -54,7 +54,14 @@ void Listesalle() {
   FILE *f1 = fopen("salle1.txt", "r"); 
   FILE *f2= fopen("salle2.txt", "r"); 
   FILE *f3 = fopen("salle3.txt", "r"); 
-
+  char nom[TAILLE];
+  int nb_rangees;
+ int nb_rangee_A;
+ int nb_rangee_B;
+ char artiste[TAILLE];
+ Date date;
+ Heure H;
+  
  
   if (f1 == NULL || f2==NULL || f3==NULL) {      // message d'erreur si le fichier ne s'ouvre pas
     printf("Erreur lors de l'ouverture du fichier.\n");
@@ -63,16 +70,8 @@ void Listesalle() {
 
   printf("Voici la liste des Salle disponibles :\n");
   printf("----------------------------------------\n");
-  printf("NOM  |  Nom du produit    |Couleur|   Prix    |  Quantite en "  "stock\n");
-  printf(
-      "--------------------------------------------------------------------\n");
-
-  while (fscanf(f, "%s %s %s %f %d", reference, nomproduit, couleur, &prix,
-                &quantiteenstock) !=
-         EOF) { // parcours le fichier jusqu'à "End Of File" (fin du fichier) en
-                // lisant les données de chaque voiture dans l'ordre spécifié
-    printf("%-10s | %-18s | %-5s | %.2f  | %d\n", reference, nomproduit,
-           couleur, prix, quantiteenstock); // affiche ces informations
+  
+  
   }
   fclose(f1); // ferme le fichier 
   fclose(f2);
