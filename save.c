@@ -14,7 +14,7 @@ void enrigistresalle(const Salle* salle) {
         printf("fichier n'existe pas.\n");
         exit(0);
     }
-  fprintf(file, "%s", recovertext(partie));
+  fprintf(file, "%s", recovertext(salle));
   fclose(file);
   printf("Votre partie a bien ete enregistre!");
 }
