@@ -7,8 +7,14 @@
 nt main() {
     int choix;
 
-    while (choix<1 || choix>3) {
-        afficherMenu();
+   do{
+   
+    printf("\n=== Menu ===\n");
+    printf("quel mode souhaitez vous utiliser?\n");
+    printf("1. Mode Manager\n");
+    printf("2. Mode Festivalier\n");
+    printf("3. Quitter\n");
+    printf("======================\n");
         printf("Entrez votre choix: ");
         scanf("%d", &choix);
 
@@ -24,7 +30,7 @@ nt main() {
                 exit(0);
             default:
                 printf("Erreur, réessaye.\n");
-        }
+        } while (choix<1 || choix>3) {
     }
 
     return 0;
