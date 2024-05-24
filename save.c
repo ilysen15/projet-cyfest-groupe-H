@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"save.h"
-#include "manegar.h"
+#include "maneger.h"
 
 
 void enrigistresalle(const Salle* salle) {
