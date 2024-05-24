@@ -51,22 +51,19 @@ typedef struct {
 } Concert;
 
 void Listesalle() {
-  FILE *f = fopen("listesalle.txt",
-                  "r"); // ouvre le fichier "listesalle.txt" en mode lecture
-  if (f == NULL) {      // message d'erreur si le fichier ne s'ouvre pas
+  FILE *f1 = fopen("salle1.txt", "r"); 
+  FILE *f2= fopen("salle2.txt", "r"); 
+  FILE *f3 = fopen("salle3.txt", "r"); 
+
+ 
+  if (f1 == NULL || f2==NULL || f3==NULL) {      // message d'erreur si le fichier ne s'ouvre pas
     printf("Erreur lors de l'ouverture du fichier.\n");
     return;
   }
-  char nom[TAILLE];
-  char nomproduit[TAILLE];
-  char couleur[CSTE];
-  float prix;
-  int quantiteenstock;
 
-  printf("Voici la liste des voitures disponibles :\n");
+  printf("Voici la liste des Salle disponibles :\n");
   printf("----------------------------------------\n");
-  printf("Reference  |  Nom du produit    |Couleur|   Prix    |  Quantite en "
-         "stock\n");
+  printf("NOM  |  Nom du produit    |Couleur|   Prix    |  Quantite en "  "stock\n");
   printf(
       "--------------------------------------------------------------------\n");
 
@@ -77,9 +74,10 @@ void Listesalle() {
     printf("%-10s | %-18s | %-5s | %.2f  | %d\n", reference, nomproduit,
            couleur, prix, quantiteenstock); // affiche ces informations
   }
-  fclose(f); // ferme le fichier "Listevoiture.txt"
+  fclose(f1); // ferme le fichier 
+  fclose(f2);
+  fclose(f3);
 }
-
 
 // Fonction pour créer une salle
 Salle *creer_salle(){
