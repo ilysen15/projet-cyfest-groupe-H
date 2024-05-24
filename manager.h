@@ -48,6 +48,8 @@ typedef struct {
     Date  date_debut;           // date de debut de concert 
     Date  date_fin;             // date de fin de concert
 } Concert;
+void Listesalle() ;
+void lire_et_afficher(FILE *f) ;
 
 Salle *creer_salle();
 Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse, float prix_a, float prix_b, float prix_c, Heure* heure_fin, Heure* heure_debut) {
