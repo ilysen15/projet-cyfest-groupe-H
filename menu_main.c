@@ -4,7 +4,7 @@
 #include "festivalier.h"
 #include "maneger.h"
 
-nt main() {
+int main() {
     int choix;
 
    do{
