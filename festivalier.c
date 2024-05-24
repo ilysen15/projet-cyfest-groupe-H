@@ -114,7 +114,7 @@ void afficher_concerts_en_cours(Concert* concerts, int nombre_concerts, Date dat
     }
 }
 
-int main() {
+int choix_festivalier() {
     // Lire les informations de la salle depuis le fichier
     Salle* salle = lire_salle_("salle1.txt");
     if (!salle) {
@@ -153,11 +153,12 @@ int main() {
     printf("Prix total des places réservées : %.2f\n", total_prix);
 
     // Libérer la mémoire
+    
     for (int i = 0; i < salle->nombre_rangees; i++) {
         free(salle->rangees[i]);
     }
     free(salle->rangees);
     free(salle);
 
-    return 0;
+
 }
