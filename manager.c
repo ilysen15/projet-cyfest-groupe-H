@@ -111,7 +111,7 @@ void afficher_etat_salle(Salle* salle) {
     printf("Sièges en catégorie C: %d\n", salle->sieges_C);
 }
 
-int main() {
+int choix_manger() {
     int choix;
     Salle* salle = NULL;
     Concert* concert = NULL;
@@ -164,6 +164,6 @@ int main() {
         }
     }
 
-    return 0;
+  
 }
 
