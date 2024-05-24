@@ -6,11 +6,11 @@ festivalier.o:festivalier.c festivalier.h
 save.o: save.c save.h
 	gcc -Wall -Wextra -Wpedantic -c save.c
 
-maneger.o: maneger.c maneger.h
-	gcc -Wall -Wextra -Wpedantic -c maneger.c
+manager.o: manager.c manager.h
+	gcc -Wall -Wextra -Wpedantic -c manager.c
 
-menu.o: menu1.c menu.h
+menu.o: menu_main.c menu.h
 	gcc -Wall -Wextra -Wpedantic -c menu1.c
 
-salle : main.c save.o maneger.o menu.o festivalier.o
+salle :  save.o manager.o menu.o festivalier.o
 	gcc -Wall -Wextra -Wpedantic main.c save.o filemanagement.o menu.o -o salle
