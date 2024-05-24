@@ -92,7 +92,7 @@ Salle *creer_salle(){
 
 // Fonction pour attribuer un concert à une salle
 Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse, float prix_a, float prix_b, float prix_c, Heure* heure_fin, Heure* heure_debut) {
-    Concert* concert = (Concert*)malloc(sizeof(Concert));
+    Concert* concert = malloc(sizeof(Concert*));
     strcpy(concert->nom, nom);
     strcpy(concert->nom_chanteur, nom_chanteur);
     concert->salle = salle;
