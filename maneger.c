@@ -50,33 +50,75 @@ typedef struct {
     Date  date_fin;             // date de fin de concert
 } Concert;
 
-void Listesalle() {
-  FILE *f1 = fopen("salle1.txt", "r"); 
-  FILE *f2= fopen("salle2.txt", "r"); 
-  FILE *f3 = fopen("salle3.txt", "r"); 
-  char nom[TAILLE];
-  int nb_rangees;
- int nb_rangee_A;
- int nb_rangee_B;
- char artiste[TAILLE];
- Date date;
- Heure H;
-  
- 
-  if (f1 == NULL || f2==NULL || f3==NULL) {      // message d'erreur si le fichier ne s'ouvre pas
-    printf("Erreur lors de l'ouverture du fichier.\n");
-    return;
-  }
+#include <stdio.h>
+#include <string.h>
 
-  printf("Voici la liste des Salle disponibles :\n");
-  printf("----------------------------------------\n");
-  
-  
-  }
-  fclose(f1); // ferme le fichier 
-  fclose(f2);
-  fclose(f3);
+#define TAILLE 50
+
+void Listesalle() {
+    FILE *f1 = fopen("salle1.txt", "r");
+    FILE *f2 = fopen("salle2.txt", "r");
+    FILE *f3 = fopen("salle3.txt", "r");
+    
+    char nom[TAILLE];
+    int nb_rangees;
+    int nb_rangees_A;
+    int nb_rangees_B;
+    int nb_sieges_par_rangee;
+    char artiste[TAILLE];
+    char date[TAILLE];
+    char heure[TAILLE];
+    
+    if (f1 == NULL || f2 == NULL || f3 == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
+        return;
+    }
+    
+    printf("Voici la liste des salles disponibles :\n");
+    printf("----------------------------------------\n");
+
+    // Fonction pour lire et afficher le contenu d'un fichier salle
+    void lire_et_afficher(FILE *f) {
+        // Lire les informations de la salle
+        fscanf(f, "nom: %s\n", nom);
+        fscanf(f, "nombre_rangees: %d\n", &nb_rangees);
+        fscanf(f, "le nombre de sièges par rangée: %d\n", &nb_sieges_par_rangee);
+        fscanf(f, "le nombre de rangées pour la catégorie A: %d\n", &nb_rangees_A);
+        fscanf(f, "le nombre de rangées pour la catégorie B: %d\n", &nb_rangees_B);
+        
+        // Lire les informations du concert
+        fscanf(f, "CONCERT :\n");
+        fscanf(f, "Artiste : %[^\n]\n", artiste); // Lire jusqu'à la fin de la ligne
+        fscanf(f, "Date : %s\n", date);
+        fscanf(f, "Heure : %[^\n]\n", heure); // Lire jusqu'à la fin de la ligne
+
+        // Afficher les informations lues
+        printf("Nom de la salle : %s\n", nom);
+        printf("Nombre de rangées : %d\n", nb_rangees);
+        printf("Nombre de sièges par rangée : %d\n", nb_sieges_par_rangee);
+        printf("Nombre de rangées pour la catégorie A : %d\n", nb_rangees_A);
+        printf("Nombre de rangées pour la catégorie B : %d\n", nb_rangees_B);
+        printf("Artiste : %s\n", artiste);
+        printf("Date : %s\n", date);
+        printf("Heure : %s\n", heure);
+        printf("----------------------------------------\n");
+    }
+
+    // Lire et afficher les informations des fichiers
+    lire_et_afficher(f1);
+    lire_et_afficher(f2);
+    lire_et_afficher(f3);
+    
+    fclose(f1);
+    fclose(f2);
+    fclose(f3);
 }
+
+int main() {
+    Listesalle();
+    return 0;
+}
+
 
 // Fonction pour créer une salle
 Salle *creer_salle(){
