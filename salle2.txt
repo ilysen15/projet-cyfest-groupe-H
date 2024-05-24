@@ -1,5 +1,11 @@
+SALLE :
 nom: class B
- nombre_rangees: 30
- le nombre de sièges par rangée: 10
- le nombre de rangées pour la catégorie A: 20
- le nombre de rangées pour la catégorie B: 10
+ nombre_rangees: 50
+ le nombre de sièges par rangée: 20
+ le nombre de rangées pour la catégorie A: 15
+ le nombre de rangées pour la catégorie B: 35
+
+CONCERT : 
+Artiste : Drake
+Date : 25/07/24
+Heure : 20h30 - 23h00
