@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "maneger.h"
-#include <stdio.h>
+#include"festivalier.c
 #include <stdlib.h>
 #include <string.h>
-#define TAILLE 100
 
-int choixsalle(void);
