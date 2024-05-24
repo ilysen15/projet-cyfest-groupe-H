@@ -4,29 +4,28 @@
 #include "festivalier.h"
 #include "maneger.h"
 
-int afficherMenu() {
+nt main() {
     int choix;
-    printf("\n=== Menu ===\n");
-    printf("quel mode souhaitez vous utiliser?\n");
-    printf("1. Mode Manager\n");
-    printf("2. Mode Festivalier\n");
-    printf("3. Quitter\n");
-    printf("======================\n");
-    
-  do{
-      printf("Mode : ");
-      scanf("%d", &choix);
-  }while(choix<0 || choix>3);
-  
-  if(choix = 1){
-      return 1;
-  }
-  else if(choix = 2){
-      return 2;
-  }
-  else{
-      return 3;
-  }
-  
-  return 0 ;
+
+    while (choix<1 || choix>3) {
+        afficherMenu();
+        printf("Entrez votre choix: ");
+        scanf("%d", &choix);
+
+        switch (choix) {
+            case 1:
+                choix_manager();
+                break;
+            case 2:
+               choix_festivalier();
+                break;
+            case 3:
+                printf("Reviens quand tu veux !\n");
+                exit(0);
+            default:
+                printf("Erreur, réessaye.\n");
+        }
+    }
+
+    return 0;
 }
