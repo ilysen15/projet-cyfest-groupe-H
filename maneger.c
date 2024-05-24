@@ -50,6 +50,37 @@ typedef struct {
     Date  date_fin;             // date de fin de concert
 } Concert;
 
+void Listesalle() {
+  FILE *f = fopen("listesalle.txt",
+                  "r"); // ouvre le fichier "listesalle.txt" en mode lecture
+  if (f == NULL) {      // message d'erreur si le fichier ne s'ouvre pas
+    printf("Erreur lors de l'ouverture du fichier.\n");
+    return;
+  }
+  char nom[TAILLE];
+  char nomproduit[TAILLE];
+  char couleur[CSTE];
+  float prix;
+  int quantiteenstock;
+
+  printf("Voici la liste des voitures disponibles :\n");
+  printf("----------------------------------------\n");
+  printf("Reference  |  Nom du produit    |Couleur|   Prix    |  Quantite en "
+         "stock\n");
+  printf(
+      "--------------------------------------------------------------------\n");
+
+  while (fscanf(f, "%s %s %s %f %d", reference, nomproduit, couleur, &prix,
+                &quantiteenstock) !=
+         EOF) { // parcours le fichier jusqu'à "End Of File" (fin du fichier) en
+                // lisant les données de chaque voiture dans l'ordre spécifié
+    printf("%-10s | %-18s | %-5s | %.2f  | %d\n", reference, nomproduit,
+           couleur, prix, quantiteenstock); // affiche ces informations
+  }
+  fclose(f); // ferme le fichier "Listevoiture.txt"
+}
+
+
 // Fonction pour créer une salle
 Salle *creer_salle(){
     int nombre_salles;
