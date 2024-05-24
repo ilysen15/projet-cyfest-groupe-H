@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include"festivalier.h"
+#define TAILLE 100
+
 typedef struct {
     char categorie;  // 'A', 'B', 'C', ou 'P' pour Pit (fosse)
     int reserve;     // 0 pour libre, 1 pour réservé
