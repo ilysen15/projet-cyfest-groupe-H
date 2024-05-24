@@ -90,30 +90,13 @@ Salle *creer_salle(){
 }
 
 
-// Fonction pour configurer les catégories de sièges
-//void configurer_categories(Salle* salle, int nombre_rangees_a, int nombre_rangees_b) {
- //   salle->nombre_rangees_a = nombre_rangees_a;
-   // salle->nombre_rangees_b = nombre_rangees_b;
-
-   // for (int i = 0; i < salle->nombre_rangees; i++) {
-      //  char categorie = 'C';
-        //if (i < nombre_rangees_a) {
-          //  categorie = 'A';
-        //} else if (i < nombre_rangees_a + nombre_rangees_b) {
-          //  categorie = 'B';
-       // }
-       // for (int j = 0; j < salle->sieges_par_rangee; j++) {
-        //    salle->rangees[i].sieges[j].categorie = categorie;
-        //}
-    //}
-//}
-
 // Fonction pour attribuer un concert à une salle
 Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse, float prix_a, float prix_b, float prix_c, Heure* heure_fin, Heure* heure_debut) {
     Concert* concert = (Concert*)malloc(sizeof(Concert));
     strcpy(concert->nom, nom);
     strcpy(concert->nom_chanteur, nom_chanteur);
-    concert->salle = creer_salle();
+    concert->salle = salle;
+    salle=creer_salle();
     concert-> fosse = fosse;
     concert->prix_a = prix_a;
     concert->prix_b = prix_b;
