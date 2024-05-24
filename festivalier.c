@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
+#include"festivalier.h"
 #define TAILLE 100
 
 // Structures et fonctions de base (déjà existantes)...
