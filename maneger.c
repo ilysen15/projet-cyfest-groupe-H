@@ -50,11 +50,6 @@ typedef struct {
     Date  date_fin;             // date de fin de concert
 } Concert;
 
-#include <stdio.h>
-#include <string.h>
-
-#define TAILLE 50
-
 void Listesalle() {
     FILE *f1 = fopen("salle1.txt", "r");
     FILE *f2 = fopen("salle2.txt", "r");
@@ -114,12 +109,6 @@ void Listesalle() {
     fclose(f3);
 }
 
-int main() {
-    Listesalle();
-    return 0;
-}
-
-
 // Fonction pour créer une salle
 Salle *creer_salle(){
     int nombre_salles;
@@ -150,15 +139,27 @@ Salle *creer_salle(){
             return 1;
         }
 
-        fprintf(fp, "Nom de la salle : %s\nNombre de rangées : %d\nNombre de sièges par rangée : %d\nNombre de sièges pour la catégorie A : %d\nNombre de sièges pour la catégorie B : %d\nNombre de sièges pour la catégorie C : %d\n\n", s[i].nom, s[i].nombre_rangees, s[i].siege_range, s[i].siege_A, s[i].siege_B, s[i].siege_C);
-
-        fclose(fp);
+     // Enregistrement des données dans un fichier
+    FILE *f = fopen("nouvelles_salles.txt", "a"); // Ouvre le fichier en mode ajout
+    if (f == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
+        return NULL;
     }
 
-    return s;
-    
-}
+    fprintf(f, "Nom: %s\n", s->nom);
+    fprintf(f, "Nombre de rangées: %d\n", s->nombre_rangees);
+    fprintf(f, "Nombre de sièges par rangée: %d\n", s->sieges_par_rangee);
+    fprintf(f, "Nombre de sièges pour la catégorie A: %d\n", s->sieges_A);
+    fprintf(f, "Nombre de sièges pour la catégorie B: %d\n", s->sieges_B);
+    fprintf(f, "Nombre de sièges pour la catégorie C: %d\n", s->sieges_C);
+    fprintf(f, "\n");
 
+    fclose(f);
+
+    return s;
+    }
+
+  
 
 // Fonction pour attribuer un concert à une salle
 Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse, float prix_a, float prix_b, float prix_c, Heure* heure_fin, Heure* heure_debut) {
@@ -215,4 +216,8 @@ void liberer_salle(Salle* salle) {
 void liberer_concert(Concert* concert) {
     free(concert);
 }
+
+
+int main(){
+ 
 
