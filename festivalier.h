@@ -40,4 +40,5 @@ typedef struct {
     Date date_debut;         // Date de début du concert
     Date date_fin;           // Date de fin du concert
 } Concert;
+Salle* lire_salle(const char* nom_fichier) ;
 
