@@ -8,7 +8,7 @@
 // Structures et fonctions de base (déjà existantes)...
 
 // Fonction pour lire les informations d'une salle depuis un fichier
-Salle* lire_salle_depuis_fichier(const char* nom_fichier) {
+Salle* lire_salle(const char* nom_fichier) {
     FILE *file = fopen(nom_fichier, "r");
     if (file == NULL) {
         printf("Erreur lors de l'ouverture du fichier %s.\n", nom_fichier);
@@ -116,7 +116,7 @@ void afficher_concerts_en_cours(Concert* concerts, int nombre_concerts, Date dat
 
 int main() {
     // Lire les informations de la salle depuis le fichier
-    Salle* salle = lire_salle_depuis_fichier("salle1.txt");
+    Salle* salle = lire_salle_("salle1.txt");
     if (!salle) {
         return 1;
     }
