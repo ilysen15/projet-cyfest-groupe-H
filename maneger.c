@@ -113,7 +113,7 @@ Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse
     Concert* concert = (Concert*)malloc(sizeof(Concert));
     strcpy(concert->nom, nom);
     strcpy(concert->nom_chanteur, nom_chanteur);
-    concert->salle = salle;
+    concert->salle = creer_salle();
     concert-> fosse = fosse;
     concert->prix_a = prix_a;
     concert->prix_b = prix_b;
