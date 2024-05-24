@@ -56,3 +56,4 @@ Concert* attribuer_concert(Salle* salle,  char* nom,char nom_chanteur, int fosse
 void afficher_etat_salle(Salle* salle) ;
 void liberer_salle(Salle* salle) ;
 void liberer_concert(Concert* concert) ;
+int choix_manger() ;
