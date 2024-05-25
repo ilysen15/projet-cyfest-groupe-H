@@ -1,0 +1,9 @@
+nom: test2
+prix_a: 23.00
+prix_b: 23.00
+prix_c: 21.00
+heure_debut: 11 11 11
+heure_fin: 12 34 44
+date_debut: 11 33 1000
+date_fin: 12 33 1200
+salle_nom: Test
