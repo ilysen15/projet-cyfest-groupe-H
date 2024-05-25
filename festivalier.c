@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include"festivalier.h"
-#define TAILLE 100
-
-// Structures et fonctions de base (déjà existantes)...
+#include "header.h"
 
 // Fonction pour lire les informations d'une salle depuis un fichier
 Salle* lire_salle(const char* nom_fichier) {
@@ -75,7 +68,7 @@ float reserver_sieges(Salle* salle, Concert* concert, int rangee, int siege) {
     } else {
         salle->rangees[rangee][siege].reserve = 1;
         printf("Le siège %d dans la rangée %d a été réservé.\n", siege + 1, rangee + 1);
-        
+       
         // Calcul du prix
         float prix = 0;
         switch (salle->rangees[rangee][siege].categorie) {
@@ -95,70 +88,42 @@ float reserver_sieges(Salle* salle, Concert* concert, int rangee, int siege) {
 
 // Fonction pour vérifier si un concert est en cours
 int concert_en_cours(Concert* concert, Date date_courante, Heure heure_courante) {
-    if ((concert->date_debut.an < date_courante.an || (concert->date_debut.an == date_courante.an && concert->date_debut.mois < date_courante.mois) || 
+    if ((concert->date_debut.an < date_courante.an || 
+        (concert->date_debut.an == date_courante.an && concert->date_debut.mois < date_courante.mois) ||
         (concert->date_debut.an == date_courante.an && concert->date_debut.mois == date_courante.mois && concert->date_debut.jour < date_courante.jour)) &&
-        (concert->date_fin.an > date_courante.an || (concert->date_fin.an == date_courante.an && concert->date_fin.mois > date_courante.mois) || 
+        (concert->date_fin.an > date_courante.an || 
+        (concert->date_fin.an == date_courante.an && concert->date_fin.mois > date_courante.mois) ||
         (concert->date_fin.an == date_courante.an && concert->date_fin.mois == date_courante.mois && concert->date_fin.jour > date_courante.jour))) {
+        return 1;
+    } else if ((concert->date_debut.jour == date_courante.jour) && (concert->date_debut.mois == date_courante.mois) && (concert->date_debut.an == date_courante.an) && 
+    (concert->heure_debut.heure < heure_courante.heure || 
+    (concert->heure_debut.heure == heure_courante.heure && concert->heure_debut.min < heure_courante.min) || 
+    (concert->heure_debut.heure == heure_courante.heure && concert->heure_debut.min == heure_courante.min && concert->heure_debut.sec <= heure_courante.sec))) {
         return 1;
     }
     return 0;
 }
 
-// Fonction pour afficher les salles avec des concerts en cours
+// Fonction pour afficher les concerts en cours
 void afficher_concerts_en_cours(Concert* concerts, int nombre_concerts, Date date_courante, Heure heure_courante) {
+    printf("Concerts en cours :\n");
     for (int i = 0; i < nombre_concerts; i++) {
         if (concert_en_cours(&concerts[i], date_courante, heure_courante)) {
-            printf("Concert en cours : %s\n", concerts[i].nom);
-            afficher_sieges_salle(concerts[i].salle);
+            printf("%s\n", concerts[i].nom);
         }
     }
 }
 
+// Menu pour les festivaliers
 int choix_festivalier() {
-    // Lire les informations de la salle depuis le fichier
-    Salle* salle = lire_salle_("salle1.txt");
-    if (!salle) {
-        return 1;
-    }
+    printf("Menu Festivalier\n");
+    printf("1. Réserver des sièges\n");
+    printf("2. Afficher les sièges d'une salle\n");
+    printf("3. Afficher les concerts en cours\n");
+    printf("4. Quitter\n");
 
-    // Afficher le plan initial de la salle
-    afficher_sieges_salle(salle);
-
-    // Initialiser un concert pour la salle lue
-    Concert concerts[1];
-    strcpy(concerts[0].nom, "Concert Rock");
-    concerts[0].salle = salle;
-    concerts[0].prix_a = 100.0f;
-    concerts[0].prix_b = 75.0f;
-    concerts[0].prix_c = 50.0f;
-    concerts[0].date_debut = (Date){24, 5, 2024};
-    concerts[0].date_fin = (Date){25, 5, 2024};
-    concerts[0].heure_debut = (Heure){19, 0, 0};
-    concerts[0].heure_fin = (Heure){22, 0, 0};
-
-    // Définir la date et l'heure actuelles
-    Date date_courante = {24, 5, 2024};
-    Heure heure_courante = {20, 0, 0};
-
-    // Afficher les concerts en cours
-    afficher_concerts_en_cours(concerts, 1, date_courante, heure_courante);
-
-    // Réservation de sièges
-    float total_prix = 0;
-    total_prix += reserver_sieges(salle, &concerts[0], 0, 0);
-    total_prix += reserver_sieges(salle, &concerts[0], 0, 1);
-
-    // Afficher le plan de la salle après les réservations
-    afficher_sieges_salle(salle);
-    printf("Prix total des places réservées : %.2f\n", total_prix);
-
-    // Libérer la mémoire
-    
-    for (int i = 0; i < salle->nombre_rangees; i++) {
-        free(salle->rangees[i]);
-    }
-    free(salle->rangees);
-    free(salle);
-
-
+    int choix;
+    printf("Votre choix : ");
+    scanf("%d", &choix);
+    return choix;
 }
