@@ -26,6 +26,8 @@ int main() {
                 choix_fest = choix_festivalier();
                 switch (choix_fest) {
                     case 1: {
+                                                // Réserver un siège pour un concert
+
                         char nom_salle[100];
                         printf("Nom de la salle : ");
                         scanf("%s", nom_salle);
