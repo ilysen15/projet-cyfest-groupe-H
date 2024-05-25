@@ -9,8 +9,8 @@ save.o: save.c save.h
 manager.o: manager.c manager.h
 	gcc -Wall -Wextra -Wpedantic -c manager.c
 
-menu.o: menu_main.c menu.h
+menu.o: menu.c menu.h
 	gcc -Wall -Wextra -Wpedantic -c menu1.c
 
-salle :  save.o manager.o menu.o festivalier.o
+salle : main.c save.o manager.o menu.o festivalier.o
 	gcc -Wall -Wextra -Wpedantic main.c save.o filemanagement.o menu.o -o salle
