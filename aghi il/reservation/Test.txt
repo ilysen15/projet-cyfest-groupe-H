@@ -1,8 +1,0 @@
-Nom: all
-Prénom: zll
-Siège réservé: Rangée 2 Siège 2
-
-Nom: za
-Prénom: az
-Siège réservé: Rangée 2 Siège 2
-

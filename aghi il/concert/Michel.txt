@@ -1,9 +1,0 @@
-nom: Michel
-prix_a: 20.00
-prix_b: 15.00
-prix_c: 10.00
-heure_debut: 22 30 0
-heure_fin: 23 45 0
-date_debut: 1 1 2020
-date_fin: 2 2 2022
-salle_nom: alpha
