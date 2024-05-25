@@ -84,4 +84,3 @@ int choix_manager() {
     scanf("%d", &choix);
     return choix;
 }
-
