@@ -41,13 +41,14 @@ Salle* lire_salle(const char* nom_fichier) {
     return salle;
 }
 
-// Fonction pour afficher les sièges d'une salle avec leurs catégories
 void afficher_sieges_salle(Salle* salle) {
     printf("Plan de la salle : %s\n", salle->nom);
     for (int i = 0; i < salle->nombre_rangees; i++) {
         for (int j = 0; j < salle->sieges_par_rangee; j++) {
-            if (salle->rangees[i][j].reserve) {
-                printf("$ "); // Siège réservé
+
+            if (verifier_reservation(salle->nom, i + 1, j + 1)) {
+                printf("R "); // Siège réservé
+                printf("(%s %s) ", salle->rangees[i][j].nom, salle->rangees[i][j].prenom); // Afficher le nom et prénom de la personne qui a réservé
             } else {
                 printf("%c ", salle->rangees[i][j].categorie); // Afficher la catégorie du siège
             }
@@ -55,20 +56,63 @@ void afficher_sieges_salle(Salle* salle) {
         printf("\n");
     }
 }
+int verifier_reservation(const char* nom_fichier, int rangee, int siege) {
+    const char* dossier = "reservation/";
+    const char* txt = ".txt";
+    char chemin[256];
 
-// Fonction pour réserver des sièges et calculer le prix total
-float reserver_sieges(Salle* salle, Concert* concert, int rangee, int siege) {
+    // Initialiser le chemin avec le dossier
+    strcpy(chemin, dossier);
+    // Ajouter le nom du fichier
+    strcat(chemin, nom_fichier);
+    // Ajouter l'extension
+    strcat(chemin, txt);
+
+    FILE* file = fopen(chemin, "r");
+    if (file == NULL) {
+        printf("Erreur lors de l'ouverture du fichier %s.\n", chemin);
+        return 0; // Retourne 0 si le fichier ne peut pas être ouvert
+    }
+
+    char buffer[256];
+    while (fgets(buffer, sizeof(buffer), file)) {
+        char ligne_nom_concert[100], nom[100], prenom[100];
+        int ligne_rangee, ligne_siege;
+        sscanf(buffer, "Siège réservé: Rangée %d Siège %d\n",
+               &ligne_siege, &ligne_rangee);
+
+        // Retirer le caractère de nouvelle ligne du nom du concert si présent
+        ligne_nom_concert[strcspn(ligne_nom_concert, "\n")] = '\0';
+        if (ligne_siege == siege && ligne_rangee == rangee) {
+            fclose(file);
+            return 1;  // Réservation trouvée
+        }
+    }
+    fclose(file);
+    return 0;  // Réservation non trouvée
+}
+float reserver_sieges(Salle* salle, Concert* concert, int rangee, int siege, const char* nom, const char* prenom) {
+    printf("la rangé est %d", rangee);
     if (rangee < 0 || rangee >= salle->nombre_rangees || siege < 0 || siege >= salle->sieges_par_rangee) {
         printf("Numéro de rangée ou de siège invalide.\n");
         return 0;
     }
-    if (salle->rangees[rangee][siege].reserve) {
+    if (verifier_reservation(salle->nom, rangee, siege)) {
         printf("Le siège est déjà réservé.\n");
         return 0;
     } else {
         salle->rangees[rangee][siege].reserve = 1;
         printf("Le siège %d dans la rangée %d a été réservé.\n", siege + 1, rangee + 1);
-       
+
+        // Enregistrement de la réservation dans le fichier de la salle
+        FILE* salle_file = fopen("reservation.txt", "a");
+        if (salle_file != NULL) {
+            fprintf(salle_file, "Réservation pour %s %s, Siège: %d, Rangée: %d, Concert: %s\n", nom, prenom, siege + 1, rangee + 1, concert->nom);
+            fclose(salle_file);
+        } else {
+            printf("Erreur lors de l'ouverture du fichier de réservation de la salle.\n");
+        }
+
         // Calcul du prix
         float prix = 0;
         switch (salle->rangees[rangee][siege].categorie) {
@@ -82,9 +126,28 @@ float reserver_sieges(Salle* salle, Concert* concert, int rangee, int siege) {
                 prix = concert->prix_c;
                 break;
         }
+
+        sauvegarder_reservation(nom, prenom,salle->nom,rangee + 1, siege + 1);
+
         return prix;
     }
 }
+
+void sauvegarder_reservation(const char* nom, const char* prenom, const char* nom_salle, int rangee, int siege) {
+    char nom_fichier[100];
+    sprintf(nom_fichier, "reservation/%s.txt", nom_salle);
+    FILE *file = fopen(nom_fichier, "a");
+    if (file) {
+        fprintf(file, "Nom: %s\n", nom);
+        fprintf(file, "Prénom: %s\n", prenom);
+        fprintf(file, "Siège réservé: Rangée %d Siège %d\n\n", rangee + 1, siege + 1);
+        fclose(file);
+        printf("Informations de réservation sauvegardées dans %s.\n", nom_fichier);
+    } else {
+        printf("Erreur lors de l'ouverture du fichier %s.\n", nom_fichier);
+    }
+}
+
 
 // Fonction pour vérifier si un concert est en cours
 int concert_en_cours(Concert* concert, Date date_courante, Heure heure_courante) {
