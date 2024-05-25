@@ -13,4 +13,4 @@ menu.o: menu.c menu.h
 	gcc -Wall -Wextra -Wpedantic -c menu1.c
 
 salle : main.c save.o manager.o menu.o festivalier.o
-	gcc -Wall -Wextra -Wpedantic main.c save.o filemanagement.o menu.o -o salle
+	gcc -Wall -Wextra -Wpedantic main.c festivalier.o save.o manager.o menu.o -o salle
